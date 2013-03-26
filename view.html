@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="jquery-1.9.1.min.js"></script>
+	<style type="text/css">
+		canvas { margin: 10px }
+	</style>
+</head>
+<body>
+<script type="text/javascript">
+function render(data) {
+	var canvas = $('<canvas width="240" height="240"></canvas>');
+	$(document.body).append(canvas);
+	var g = canvas.get(0).getContext('2d');
+	data.split(/\n/).forEach(function(line, y) {
+		line.split(/\s+/).forEach(function(cell, x) {
+			g.fillStyle = '#' + cell;
+			g.fillRect(x * 30, y * 30, 30, 30);
+		});
+	});
+}
+
+for (var i = 1; i <= 55; i++) {
+	$.get('solutions/' + ("0" + i).substr(-2) + '.txt',
+		null, render);	
+}
+</script>
+</body>
+</html>
